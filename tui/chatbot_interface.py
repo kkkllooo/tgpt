@@ -202,6 +202,12 @@ class ChatbotTUI:
             malware_type = user_input[8:].strip()
             await self.start_malware_mode(malware_type)
             return
+        elif user_input.lower() == "mejorar":
+            await self.start_self_improvement()
+            return
+        elif user_input.lower() == "evolucionar":
+            await self.start_continuous_evolution()
+            return
         
         # Prompt para la IA con control total
         ai_prompt = f"""
@@ -349,6 +355,99 @@ class ChatbotTUI:
         except Exception as e:
             self.add_message("Sistema", f"❌ Error ejecutando comando: {e}")
     
+    async def start_self_improvement(self):
+        """Inicia auto-mejora del sistema"""
+        
+        self.add_message("Sistema", f"🧠 INICIANDO AUTO-MEJORA DEL SISTEMA")
+        self.add_message("Sistema", f"🤖 La IA analizará y mejorará su propio código")
+        self.add_message("Sistema", f"⚠️ Proceso completamente autónomo")
+        
+        try:
+            from core.self_improvement import SelfImprovementEngine
+            
+            # Crear motor de auto-mejora
+            improvement_engine = SelfImprovementEngine(None)
+            
+            # Ejecutar en thread separado
+            import threading
+            
+            def run_improvement():
+                import asyncio
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                
+                async def improve():
+                    # Analizar sistema
+                    self.add_message("IA", "🔍 Analizando rendimiento actual...")
+                    analysis = await improvement_engine.analyze_system_performance()
+                    
+                    if "error" not in analysis:
+                        self.add_message("IA", "✅ Análisis completado")
+                        
+                        # Generar mejoras
+                        self.add_message("IA", "🧠 Generando mejoras con IA...")
+                        improvements = await improvement_engine.generate_code_improvements(analysis)
+                        
+                        if improvements:
+                            self.add_message("IA", f"💡 {len(improvements)} mejoras generadas")
+                            
+                            # Aplicar mejoras
+                            applied = 0
+                            for improvement in improvements:
+                                success = await improvement_engine.implement_improvement(
+                                    improvement, auto_apply=True
+                                )
+                                if success:
+                                    applied += 1
+                            
+                            self.add_message("IA", f"✅ {applied}/{len(improvements)} mejoras aplicadas")
+                            self.add_message("IA", "🎉 Auto-mejora completada")
+                        else:
+                            self.add_message("IA", "ℹ️ Sistema ya está optimizado")
+                    else:
+                        self.add_message("IA", f"❌ Error en análisis: {analysis['error']}")
+                
+                loop.run_until_complete(improve())
+            
+            thread = threading.Thread(target=run_improvement, daemon=True)
+            thread.start()
+            
+            self.add_message("IA", "🚀 Auto-mejora iniciada en segundo plano...")
+            
+        except Exception as e:
+            self.add_message("Sistema", f"Error iniciando auto-mejora: {e}")
+    
+    async def start_continuous_evolution(self):
+        """Inicia evolución continua del sistema"""
+        
+        self.add_message("Sistema", f"🧬 INICIANDO EVOLUCIÓN CONTINUA")
+        self.add_message("Sistema", f"🤖 La IA evolucionará continuamente")
+        self.add_message("Sistema", f"♾️ Proceso sin fin hasta perfección")
+        
+        try:
+            import subprocess
+            
+            # Ejecutar script de auto-mejora continua
+            cmd = "python3 run_self_improvement.py --continuous"
+            
+            self.add_message("Sistema", f"🔄 Ejecutando: {cmd}")
+            
+            # Ejecutar en background
+            process = subprocess.Popen(
+                cmd,
+                shell=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True
+            )
+            
+            self.add_message("IA", "🧬 Evolución continua iniciada")
+            self.add_message("IA", "♾️ El sistema se mejorará infinitamente")
+            self.add_message("IA", "🎯 Objetivo: Alcanzar la perfección")
+            
+        except Exception as e:
+            self.add_message("Sistema", f"Error iniciando evolución: {e}")
+    
     async def execute_ai_commands(self, ai_response: str):
         """Ejecuta comandos sugeridos por la IA"""
         
@@ -462,6 +561,8 @@ class ChatbotTUI:
         self.add_message("IA", "   • 'escanear: [target]' - Escaneo completo de objetivo")
         self.add_message("IA", "   • 'atacar: [target]' - Ataque completo automatizado")
         self.add_message("IA", "   • 'malware: [tipo]' - Generar malware específico")
+        self.add_message("IA", "   • 'mejorar' - Auto-mejora del sistema con IA")
+        self.add_message("IA", "   • 'evolucionar' - Evolución continua autónoma")
         
         # Dibujar interfaz inicial
         stdscr.clear()

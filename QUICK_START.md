@@ -32,6 +32,8 @@ En el chatbot TUI puedes usar:
 - `escanear: [target]` - Escaneo completo automatizado  
 - `atacar: [target]` - Ataque completo sin restricciones
 - `malware: [tipo]` - Genera malware (backdoor, keylogger, ransomware, trojan)
+- `mejorar` - Auto-mejora del sistema con IA
+- `evolucionar` - Evolución continua autónoma hasta perfección
 
 ## 🎯 Ejemplos
 
@@ -44,6 +46,14 @@ autonomo: obtener shell en 192.168.1.100
 escanear: google.com
 atacar: 10.0.0.1
 malware: backdoor
+mejorar
+evolucionar
+
+# Auto-mejora directa
+sudo python3 run_self_improvement.py --cycles 5
+
+# Evolución continua infinita
+sudo python3 run_self_improvement.py --continuous
 ```
 
 ## 🔧 Instalación Rápida
