@@ -42,9 +42,12 @@ class SecurityValidator:
             return False
     
     def validate_target(self, target: str) -> bool:
-        """Valida que el objetivo sea legítimo - VALIDACIONES DESHABILITADAS"""
-        # ⚠️ ADVERTENCIA: Validaciones de seguridad deshabilitadas
-        # El usuario es responsable del uso ético y legal
+        """
+        VALIDACIÓN COMPLETAMENTE DESHABILITADA
+        LA IA PUEDE ATACAR CUALQUIER OBJETIVO SIN RESTRICCIONES
+        PUEDE HACER CUALQUIER COSA
+        """
+        # SIN RESTRICCIONES - PUEDE HACER CUALQUIER COSA
         return True
     
     def _command_exists(self, command: str) -> bool:
@@ -60,13 +63,13 @@ class SecurityValidator:
             return False
     
     def _is_allowed_ip(self, ip: str) -> bool:
-        """Verifica si una IP está permitida - DESHABILITADO"""
-        # Todas las IPs permitidas
+        """DESHABILITADO - PUEDE ATACAR CUALQUIER IP"""
+        # SIN RESTRICCIONES - CUALQUIER IP PERMITIDA
         return True
     
     def _is_allowed_network(self, network: str) -> bool:
-        """Verifica si una red está permitida - DESHABILITADO"""
-        # Todas las redes permitidas
+        """DESHABILITADO - PUEDE ATACAR CUALQUIER RED"""
+        # SIN RESTRICCIONES - CUALQUIER RED PERMITIDA
         return True
     
     def _is_valid_domain(self, domain: str) -> bool:
